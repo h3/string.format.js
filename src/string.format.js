@@ -1,19 +1,86 @@
 /*
-  jQuery strings - 0.4
-  http://code.google.com/p/jquery-utils/
+ *
+  string.format - 0.1
+  https://github.com/h3/string.format.js
   
-  (c) Maxime Haineault <haineault@gmail.com>
-  http://haineault.com   
+  (c) Maxime Haineault <max@motion-m.ca>
+  http://motion-m.ca - http://haineault.com
 
   MIT License (http://www.opensource.org/licenses/mit-license.php)
 
-  Implementation of Python3K advanced string formatting
+  JavaScript implementation of Python Advanced String Formatting
   http://www.python.org/dev/peps/pep-3101/
 
-  Documentation: http://code.google.com/p/jquery-utils/wiki/StringFormat
-  
 */
-(function($){
+
+(function(){
+
+    var arguments2Array = function(args, shift) {
+        /* Converts regular JavaScript arguments to a
+         * real JavaScript Array object.
+         */
+        var o = [];
+        for (l=args.length, x=(shift || 0)-1; x<l;x++) { o.push(args[x]); }
+        return o;
+    };
+    
+    var Argument = function(arg, args) {
+        /* A manager for string format arguments.
+         */
+        this.__arg  = arg;
+        this.__args = args;
+        this.__max_precision = parseFloat('1.'+ (new Array(32)).join('1'), 10).toString().length-3;
+        this.__def_precision = 6;
+        this.getString = function(){
+            return this.__arg;
+        };
+        this.getKey = function(){
+            return this.__arg.split(':')[0];
+        };
+        this.getFormat = function(){
+            var match = this.getString().split(':');
+            return (match && match[1])? match[1]: 's';
+        };
+        this.getPrecision = function(){
+            var match = this.getFormat().match(/\.(\d+|\*)/g);
+            if (!match) { return this.__def_precision; }
+            else {
+                match = match[0].slice(1);
+                if (match != '*') { return parseInt(match, 10); }
+                else if(strings.strConversion.__getType(this.__args) == 'array') {
+                    return this.__args[1] && this.__args[0] || this.__def_precision;
+                }
+                else if(strings.strConversion.__getType(this.__args) == 'object') {
+                    return this.__args[this.getKey()] && this.__args[this.getKey()][0] || this.__def_precision;
+                }
+                else { return this.__def_precision; }
+            }
+        };
+        this.getPaddingLength = function(){
+            var match = false;
+            if (this.isAlternate()) {
+                match = this.getString().match(/0?#0?(\d+)/);
+                if (match && match[1]) { return parseInt(match[1], 10); }
+            }
+            match = this.getString().match(/(0|\.)(\d+|\*)/g);
+            return match && parseInt(match[0].slice(1), 10) || 0;
+        };
+        this.getPaddingString = function(){
+            var o = '';
+            if (this.isAlternate()) { o = ' '; }
+            // 0 take precedence on alternate format
+            if (this.getFormat().match(/#0|0#|^0|\.\d+/)) { o = '0'; }
+            return o;
+        };
+        this.getFlags = function(){
+            var match = this.getString().matc(/^(0|\#|\-|\+|\s)+/);
+            return match && match[0].split('') || [];
+        };
+        this.isAlternate = function() {
+            return !!this.getFormat().match(/^0?#/);
+        };
+    };
+
     var strings = {
         strConversion: {
             // tries to translate any objects type into string gracefully
@@ -159,6 +226,16 @@
             var match  = false;
             var buffer = [];
             var token  = '';
+            console.log(arguments.length)
+            console.log(this)
+            if (arguments.length == 1) {
+                var str = this;
+                var args = arguments[0];
+            }
+            else {
+                var str = arguments[0];
+                var args = arguments[1];
+            }
             var tmp    = (str||'').split('');
             for(start=0; start < tmp.length; start++) {
                 if (tmp[start] == '{' && tmp[start+1] !='{') {
@@ -175,119 +252,10 @@
                 else if (start > end || buffer.length < 1) { buffer.push(tmp[start]); }
             }
             return (buffer.length > 1)? buffer.join(''): buffer[0];
-        },
-
-        calc: function(str, args) {
-            return eval(format(str, args));
-        },
-
-        repeat: function(s, n) { 
-            return new Array(n+1).join(s); 
-        },
-
-        UTF8encode: function(s) { 
-            return unescape(encodeURIComponent(s)); 
-        },
-
-        UTF8decode: function(s) { 
-            return decodeURIComponent(escape(s)); 
-        },
-
-        tpl: function() {
-            var out = '';
-            var render = true;
-            // Set
-            // $.tpl('ui.test', ['<span>', helloWorld ,'</span>']);
-            if (arguments.length == 2 && $.isArray(arguments[1])) {
-                this[arguments[0]] = arguments[1].join('');
-                return $(this[arguments[0]]);
-            }
-            // $.tpl('ui.test', '<span>hello world</span>');
-            if (arguments.length == 2 && $.isString(arguments[1])) {
-                this[arguments[0]] = arguments[1];
-                return $(this[arguments[0]]);
-            }
-            // Call
-            // $.tpl('ui.test');
-            if (arguments.length == 1) {
-                return $(this[arguments[0]]);
-            }
-            // $.tpl('ui.test', false);
-            if (arguments.length == 2 && arguments[1] == false) {
-                return this[arguments[0]];
-            }
-            // $.tpl('ui.test', {value:blah});
-            if (arguments.length == 2 && $.isObject(arguments[1])) {
-                return $($.format(this[arguments[0]], arguments[1]));
-            }
-            // $.tpl('ui.test', {value:blah}, false);
-            if (arguments.length == 3 && $.isObject(arguments[1])) {
-                return (arguments[2] == true) 
-                    ? $.format(this[arguments[0]], arguments[1])
-                    : $($.format(this[arguments[0]], arguments[1]));
-            }
         }
     };
 
-    var Argument = function(arg, args) {
-        this.__arg  = arg;
-        this.__args = args;
-        this.__max_precision = parseFloat('1.'+ (new Array(32)).join('1'), 10).toString().length-3;
-        this.__def_precision = 6;
-        this.getString = function(){
-            return this.__arg;
-        };
-        this.getKey = function(){
-            return this.__arg.split(':')[0];
-        };
-        this.getFormat = function(){
-            var match = this.getString().split(':');
-            return (match && match[1])? match[1]: 's';
-        };
-        this.getPrecision = function(){
-            var match = this.getFormat().match(/\.(\d+|\*)/g);
-            if (!match) { return this.__def_precision; }
-            else {
-                match = match[0].slice(1);
-                if (match != '*') { return parseInt(match, 10); }
-                else if(strings.strConversion.__getType(this.__args) == 'array') {
-                    return this.__args[1] && this.__args[0] || this.__def_precision;
-                }
-                else if(strings.strConversion.__getType(this.__args) == 'object') {
-                    return this.__args[this.getKey()] && this.__args[this.getKey()][0] || this.__def_precision;
-                }
-                else { return this.__def_precision; }
-            }
-        };
-        this.getPaddingLength = function(){
-            var match = false;
-            if (this.isAlternate()) {
-                match = this.getString().match(/0?#0?(\d+)/);
-                if (match && match[1]) { return parseInt(match[1], 10); }
-            }
-            match = this.getString().match(/(0|\.)(\d+|\*)/g);
-            return match && parseInt(match[0].slice(1), 10) || 0;
-        };
-        this.getPaddingString = function(){
-            var o = '';
-            if (this.isAlternate()) { o = ' '; }
-            // 0 take precedence on alternate format
-            if (this.getFormat().match(/#0|0#|^0|\.\d+/)) { o = '0'; }
-            return o;
-        };
-        this.getFlags = function(){
-            var match = this.getString().matc(/^(0|\#|\-|\+|\s)+/);
-            return match && match[0].split('') || [];
-        };
-        this.isAlternate = function() {
-            return !!this.getFormat().match(/^0?#/);
-        };
-    };
-
-    var arguments2Array = function(args, shift) {
-        var o = [];
-        for (l=args.length, x=(shift || 0)-1; x<l;x++) { o.push(args[x]); }
-        return o;
-    };
-    $.extend(strings);
-})(jQuery);
+    String.prototype.format = strings.format;
+    // jQuery
+    //$.extend(strings);
+})();
