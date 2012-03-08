@@ -66,7 +66,7 @@ The conversion flag characters are:
 +---------+-----------------------------------------------------------------+
 | 0       | The conversion will be zero padded for numeric values.          |
 +---------+-----------------------------------------------------------------+
-| -       | The converted value is left adjusted (overrides the "0"         |
+| `-`     | The converted value is left adjusted (overrides the "0"         |
 |         | conversion if both are given). [1]_                             |
 +---------+-----------------------------------------------------------------+
 | space   | A blank or an empty string should be left before a positive     |
