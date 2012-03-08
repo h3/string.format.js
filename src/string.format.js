@@ -9,7 +9,10 @@
   MIT License (http://www.opensource.org/licenses/mit-license.php)
 
   JavaScript implementation of Python Advanced String Formatting
+
+  http://docs.python.org/library/string.html
   http://www.python.org/dev/peps/pep-3101/
+  http://docs.python.org/lib/typesseq-strings.html 
 
 */
 
