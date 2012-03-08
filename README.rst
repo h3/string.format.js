@@ -57,10 +57,12 @@ Known issues
 The conversion flags
 --------------------
 
+The conversion flag characters are:
+
 +---------+-----------------------------------------------------------------+
 | Flag    | Meaning                                                         |
 +=========+=================================================================+
-| #       | The value conversion will use the alternate form                |
+| \#      | The value conversion will use the alternate form                |
 +---------+-----------------------------------------------------------------+
 | 0       | The conversion will be zero padded for numeric values.          |
 +---------+-----------------------------------------------------------------+
