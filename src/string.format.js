@@ -234,7 +234,6 @@
                 token = tmp.slice(start+1, end).join('');
                 if (tmp[start-1] != '{' && tmp[end+1] != '}') {
                     var tokenArgs = (typeof args != 'object')? arguments2Array(arguments): args || [];
-                    console.log(arguments2Array(arguments))
                     buffer.push(strConversion.__formatToken(token, tokenArgs));
                 }
                 else {
