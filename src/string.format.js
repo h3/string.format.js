@@ -22,7 +22,7 @@
         // Converts regular JavaScript arguments to a
         // real JavaScript Array object.
         var o, x, l;
-        for (o=[], l=args.length, x=(shift || 0); x<l;x++) o.push(args[x]);
+        for (o = [], l = args.length, x = (shift || 0); x < l; x++) o.push(args[x]);
         return o;
     };
     
