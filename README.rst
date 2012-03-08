@@ -17,6 +17,7 @@ Simple replacement
 ^^^^^^^^^^^^^^^^^^
 
 ::
+
     // all return "1bc"
     '{a}bc'.format({a:'1'}) // named arguments
     '{0}bc'.format([1])     // array arguments
