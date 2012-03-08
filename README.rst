@@ -64,13 +64,13 @@ The conversion flags
 +---------+-----------------------------------------------------------------+
 | 0       | The conversion will be zero padded for numeric values.          |
 +---------+-----------------------------------------------------------------+
-| -       | The converted value is left adjusted (overrides the "0"         |
+| \-      | The converted value is left adjusted (overrides the "0"         |
 |         | conversion if both are given). [1]_                             |
 +---------+-----------------------------------------------------------------+
-| uspace> | A blank or an empty string should be left before a positive     |
+| space   | A blank or an empty string should be left before a positive     |
 |         | number produced by a signed conversion. [1]_                    |
 +---------+-----------------------------------------------------------------+
-| + 	     | A sign character ("+" or "-") will precede the conversion       |
+| \+	     | A sign character ("+" or "-") will precede the conversion       |
 |         | (overrides a "space" flag). [1]_                                |
 +---------+-----------------------------------------------------------------+
 
