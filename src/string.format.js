@@ -1,5 +1,4 @@
 /*
- *
   string.format - 0.1
   https://github.com/h3/string.format.js
   
@@ -13,7 +12,6 @@
   http://docs.python.org/library/string.html
   http://www.python.org/dev/peps/pep-3101/
   http://docs.python.org/lib/typesseq-strings.html 
-
 */
 
 (function(){
@@ -277,5 +275,6 @@
         }
         return (buffer.length > 1)? buffer.join(''): buffer[0];
     };
+
     String.prototype.format = format;
 })();
