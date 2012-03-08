@@ -62,60 +62,60 @@ The conversion flag characters are:
 +---------+-----------------------------------------------------------------+
 | Flag    | Meaning                                                         |
 +=========+=================================================================+
-| \#      | The value conversion will use the alternate form                |
+| #       | The value conversion will use the alternate form                |
 +---------+-----------------------------------------------------------------+
 | 0       | The conversion will be zero padded for numeric values.          |
 +---------+-----------------------------------------------------------------+
-| \-      | The converted value is left adjusted (overrides the "0"         |
+| -       | The converted value is left adjusted (overrides the "0"         |
 |         | conversion if both are given). [1]_                             |
 +---------+-----------------------------------------------------------------+
 | space   | A blank or an empty string should be left before a positive     |
 |         | number produced by a signed conversion. [1]_                    |
 +---------+-----------------------------------------------------------------+
-| \+	     | A sign character ("+" or "-") will precede the conversion       |
+| `+`     | A sign character ("`+`" or "-") will precede the conversion     |
 |         | (overrides a "space" flag). [1]_                                |
 +---------+-----------------------------------------------------------------+
 
 Conversions types
 -----------------
 
-+-----------+----------------------------------------------------------------+
-| **Type**  | **Description**                                                |
-+-----------+----------------------------------------------------------------+
-| d 	       | Signed integer decimal  	                                     |
-+-----------+----------------------------------------------------------------+
-| i 	       | Signed integer decimal                                         |
-+-----------+----------------------------------------------------------------+
-| o 	       | Unsigned octal [2]_                                            |
-+-----------+----------------------------------------------------------------+
-| u 	       | Unsigned decimal                                               |
-+-----------+----------------------------------------------------------------+
-| x 	       | Unsigned hexadecimal (lowercase) [3]_                          |
-+-----------+----------------------------------------------------------------+
-| X 	       | Unsigned hexadecimal (uppercase)  [3]_                         |
-+-----------+----------------------------------------------------------------+
-| e 	       | Floating point exponential format (lowercase) [4]_             |
-+-----------+----------------------------------------------------------------+
-| E 	       | Floating point exponential format (uppercase) [4]_             |
-+-----------+----------------------------------------------------------------+
-| f 	       | Floating point decimal format [4]_                             |
-+-----------+----------------------------------------------------------------+
-| F 	       | Floating point decimal format [4]_                             |
-+-----------+----------------------------------------------------------------+
-| g 	       | Floating point format. uses exponential format if exponent is  |
-|           | greater than -4 or less than precision, decimal format         |
-|           | otherwise [5]_                                                 |
-+-----------+----------------------------------------------------------------+
-| G 	       | Floating point format. Uses exponential format if exponent is  |
-|           | greater than -4 or less than precision, decimal format         |
-|           | otherwise [5]_                                                 |
-+-----------+----------------------------------------------------------------+
-| c 	       | Single character (accepts integer or single character string)  |	
-+-----------+----------------------------------------------------------------+
-| r 	       | String (converts any JavaScript object using repr()) [6]_      |
-+-----------+----------------------------------------------------------------+
-| s 	       | String (converts any JavaScript object using toString()) [7]_  |
-+-----------+----------------------------------------------------------------+
++-------+--------------------------------------------------------------------+
+| Type  | Description                                                        |
++=======+====================================================================+
+| d     | Signed integer decimal                                             |
++-------+--------------------------------------------------------------------+
+| i     | Signed integer decimal                                             |
++-------+--------------------------------------------------------------------+
+| o     | Unsigned octal [2]_                                                |
++-------+--------------------------------------------------------------------+
+| u     | Unsigned decimal                                                   |
++-------+--------------------------------------------------------------------+
+| x     | Unsigned hexadecimal (lowercase) [3]_                              |
++-------+--------------------------------------------------------------------+
+| X     | Unsigned hexadecimal (uppercase)  [3]_                             |
++-------+--------------------------------------------------------------------+
+| e     | Floating point exponential format (lowercase) [4]_                 |
++-------+--------------------------------------------------------------------+
+| E     | Floating point exponential format (uppercase) [4]_                 |
++-------+--------------------------------------------------------------------+
+| f     | Floating point decimal format [4]_                                 |
++-------+--------------------------------------------------------------------+
+| F     | Floating point decimal format [4]_                                 |
++-------+--------------------------------------------------------------------+
+| g     | Floating point format. uses exponential format if exponent is      |
+|       | greater than -4 or less than precision, decimal format             |
+|       | otherwise [5]_                                                     |
++-------+--------------------------------------------------------------------+
+| G     | Floating point format. Uses exponential format if exponent is      |
+|       | greater than -4 or less than precision, decimal format             |
+|       | otherwise [5]_                                                     |
++-------+--------------------------------------------------------------------+
+| c     | Single character (accepts integer or single character string)      | 
++-------+--------------------------------------------------------------------+
+| r     | String (converts any JavaScript object using repr()) [6]_          |
++-------+--------------------------------------------------------------------+
+| s     | String (converts any JavaScript object using toString()) [7]_      |
++-------+--------------------------------------------------------------------+
 
 Footnotes
 ^^^^^^^^^
