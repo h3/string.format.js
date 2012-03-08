@@ -277,7 +277,5 @@
         }
         return (buffer.length > 1)? buffer.join(''): buffer[0];
     };
-
     String.prototype.format = format;
-
 })();
