@@ -15,6 +15,7 @@ string.format examples
 
 Simple replacement
 ^^^^^^^^^^^^^^^^^^
+
 ::
     // all return "1bc"
     '{a}bc'.format({a:'1'}) // named arguments
