@@ -50,9 +50,9 @@ Padding
 Known issues
 ------------
 
- * JavaScript precision is more limited than Python
- * Python zero pad exponent (10 -> 1.0e+01), not JavaScript (10 -> 1.0e+1)
- * The repr implementation is different in python
+* JavaScript precision is more limited than Python
+* Python zero pad exponent (10 -> 1.0e+01), not JavaScript (10 -> 1.0e+1)
+* The repr implementation is different in python
 
 The conversion flags
 --------------------
