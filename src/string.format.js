@@ -1,14 +1,13 @@
 /*
   string.format - 0.1
-  https://github.com/h3/string.format.js
+  JavaScript implementation of Python Advanced String Formatting
+
+  MIT License (http://www.opensource.org/licenses/mit-license.php)
   
   (c) Maxime Haineault <max@motion-m.ca>
   http://motion-m.ca - http://haineault.com
 
-  MIT License (http://www.opensource.org/licenses/mit-license.php)
-
-  JavaScript implementation of Python Advanced String Formatting
-
+  https://github.com/h3/string.format.js
   http://docs.python.org/library/string.html
   http://www.python.org/dev/peps/pep-3101/
   http://docs.python.org/lib/typesseq-strings.html 
@@ -17,8 +16,7 @@
 (function(){
 
     var arguments2Array = function(args, shift) {
-        // Converts regular JavaScript arguments to a
-        // real JavaScript Array object.
+        // Converts regular JavaScript arguments to a real JavaScript Array object.
         var o, x, l;
         for (o = [], l = args.length, x = (shift || 0); x < l; x++) o.push(args[x]);
         return o;
@@ -56,7 +54,7 @@
                 else if(strConversion.__getType(this.__args) == 'object') {
                     return this.__args[this.getKey()] && this.__args[this.getKey()][0] || this.__def_precision;
                 }
-                else { return this.__def_precision; }
+                else return this.__def_precision;
             }
         };
 
@@ -86,8 +84,7 @@
         this.isAlternate = function() {
             return !!this.getFormat().match(/^0?#/);
         };
-    // Argument
-    };
+    };  // Argument
 
     var strConversion = {
         __repr: function(i){
@@ -246,8 +243,7 @@
             // String (converts any JavaScript object using object.toString())
             return input.toString && input.toString() || '' + input;
         }
-    // strConversion
-    };
+    }; // strConversion
 
     var format = function() {
         var end    = 0,
@@ -271,18 +267,19 @@
                 }
                 else buffer.push(token);
             }
-            else if (start > end || buffer.length < 1) { buffer.push(tmp[start]); }
+            else if (start > end || buffer.length < 1) buffer.push(tmp[start]);
         }
         return (buffer.length > 1)? buffer.join(''): buffer[0];
     };
 
-
+    // jQuery integration
     if (typeof(jQuery) != 'undefined') {
         $.format = function() {
             var str = arguments[0];
             return format.apply(str, arguments2Array(arguments, 1)[0])
         };
     }
+    // Native prototyping
     else String.prototype.format = format;
-})();
 
+})();
