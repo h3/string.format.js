@@ -1,14 +1,36 @@
 string.format.js
 ================
 
-A framework independant implementation of Python's Advanced String Formatting in JavaScript.
+A framework independant implementation of Python's Advanced String Formatting 
+in JavaScript.
 
 Refs:
 
 * http://docs.python.org/library/string.html
 * http://www.python.org/dev/peps/pep-3101/
 * http://docs.python.org/lib/typesseq-strings.html 
- 
+
+Frameworks integration
+----------------------
+
+string.format.js currently integrate transparently with jQuery. More 
+JavaScript frameworks will be supported eventually.
+
+jQuery
+^^^^^^
+
+If string.format.js is loaded after jQuery, it will create a new jQuery 
+function called `$.format` instead of prototyping the native `String`
+object.
+
+::
+
+    // This won't work anymore !
+    '{a}bc'.format({a:'1'})
+
+    // But this will
+    $.format('{a}bc', {a:'1'})
+
 
 string.format examples
 ----------------------
@@ -127,3 +149,13 @@ Footnotes
 .. [5] The alternate form causes the result to always contain a decimal point, and trailing zeroes are not removed as they would otherwise be. The precision determines the number of significant digits before and after the decimal point and defaults to 6.
 .. [6] The %r conversion was added in Python 2.0. The precision determines the maximal number of characters used.
 .. [7] If the object or format provided is a unicode string, the resulting string will also be unicode. The precision determines the maximal number of characters used. 
+
+Credits
+=======
+
+This project was created and is sponsored by:
+
+.. figure:: http://motion-m.ca/media/img/logo.png
+    :figwidth: image
+
+Motion Média (http://motion-m.ca)
