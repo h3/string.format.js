@@ -276,5 +276,13 @@
         return (buffer.length > 1)? buffer.join(''): buffer[0];
     };
 
-    String.prototype.format = format;
+
+    if (typeof(jQuery) != 'undefined') {
+        $.format = function() {
+            var str = arguments[0];
+            return format.apply(str, arguments2Array(arguments, 1)[0])
+        };
+    }
+    else String.prototype.format = format;
 })();
+

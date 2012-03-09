@@ -128,7 +128,6 @@ for (_test_ in STRING_FORMAT_TESTS) {
             assert = STRING_FORMAT_TESTS[_test_][assertion];
             // Test with jQuery
             if (typeof(jQuery) != 'undefined') {
-                console.log(assert)
                 window[assert[0]].apply(this, [
                     $.format.apply(this, [assert[1], assert[2]]), 
                     assert[3], 
