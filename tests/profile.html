@@ -1,1 +1,30 @@
-todo..
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>Unit tests for string.format.js</title>
+        <script src="../src/string.format.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+        <script src="profile.js"></script>
+        <script>
+        $(function(){
+            runner('3 chars string, single replacement', 'ab{0:s}', 'c', iterations);
+            runner('1 000 chars string, single replacement', textblock(1000, '{0:s}'), 'c', iterations);
+            runner('5 000 chars string, single replacement', textblock(5000, '{0:s}'), 'c', iterations);
+        });
+        </script>
+    </head>
+    <body>
+        <h1>Profiling tests</h1>
+        <table id="profile-results" border="1">
+            <thead>
+                <tr>
+                    <th>Test</th>
+                    <th>Iterations</th>
+                    <th>Run time</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </body>
+</html>
