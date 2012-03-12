@@ -72,14 +72,19 @@ def make(options):
 
     VERSION  = get_version('src/string.format.js')
 
-    log("Building string.format.js v%s" % VERSION, 'info')
+    log("Building v%s" % VERSION, 'info')
 
     # Minify
     minsrc  = os.path.join(os.path.join(SRC_DIR, 'string.format.js'))
     mindest = os.path.join(os.path.join(SRC_DIR, 'string.format.min.js'))
     minify(minsrc, mindest)
 
-    log("Creating and pushing tag v1.0" % VERSION, 'info')
+    log("Commiting string.format.min.js to git", 'info')
+    os.system('git add src/string.format.min.js')
+    os.system('git commit -m "Updated string.format.min.js (v%s)"' % VERSION)
+    os.system('git push')
+
+    log("Creating a v%s tag" % VERSION, 'info')
     os.system('git tag -a v%s' % VERSION)
     os.system('git push origin v%s' % VERSION)
 
