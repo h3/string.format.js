@@ -85,7 +85,7 @@ def make(options):
     os.system('git push')
 
     log("Creating a v%s tag" % VERSION, 'info')
-    os.system('git tag -a v%s' % VERSION)
+    os.system('git tag -a v%s -m "Tagged v%s"' % (VERSION, VERSION))
     os.system('git push origin v%s' % VERSION)
 
     log('Done.\n', 'info')
