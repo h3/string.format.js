@@ -1,5 +1,5 @@
 /*
-  string.format - 0.1
+  string.format - version: 0.1
   JavaScript implementation of Python Advanced String Formatting
 
   MIT License (http://www.opensource.org/licenses/mit-license.php)
