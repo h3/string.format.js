@@ -246,30 +246,33 @@
     }; // strConversion
 
     var format = function() {
-        var end    = 0,
-            start  = 0,
-            buffer = [],
-            token  = '',
-            match  = false,
-            str    = this,
-            args   = arguments[0],
-            tmp    = (str || '').split('');
+        var next, close,
+            out   = [],
+            str   = this,
+            len   = this.length,
+            args  = arguments[0]
+            index = 0;
 
-        for(start = 0; start < tmp.length; start++) {
-            if (tmp[start] == '{' && tmp[start + 1] != '{') {
-                end   = str.indexOf('}', start);
-                token = tmp.slice(start + 1, end).join('');
-                if (tmp[start-1] != '{' && tmp[end + 1] != '}') {
-                    buffer.push(
-                        strConversion.__formatToken(token, (
-                            typeof args != 'object') 
+        while (index < len) {
+            next = str.indexOf('{', index);
+            if (next === -1) { out.push(str.slice(index, len)); break; }
+            else {
+                close = str.indexOf('}', next + 1);
+                if (str[next + 1] == '{' && str[close + 1] === '}') { // Escape handling
+                    out.push(str.slice(next + 1, close + 1))
+                    index = close + 2;
+                } else { // Append pre bracket chars to buffer
+                    out.push(str.slice(index, next));
+                    index = next + 1;
+                    end = str.indexOf('}', index)
+                    token = str.slice(index, end);
+                    out.push(strConversion.__formatToken(token, (typeof args != 'object') 
                                 ? arguments2Array(arguments): args || []));
+                    index = end + 1;
                 }
-                else buffer.push(token);
             }
-            else if (start > end || buffer.length < 1) buffer.push(tmp[start]);
         }
-        return (buffer.length > 1)? buffer.join(''): buffer[0];
+        return out.join('');
     };
 
     // jQuery integration
