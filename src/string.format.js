@@ -279,7 +279,7 @@
     if (typeof(jQuery) != 'undefined') {
         $.format = function() {
             var str = arguments[0];
-            return format.apply(str, arguments2Array(arguments, 1)[0])
+            return format.apply(str, arguments2Array(arguments, 1))
         };
     }
     // Native prototyping
