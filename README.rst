@@ -148,14 +148,4 @@ Footnotes
 .. [4] The alternate form causes the result to always contain a decimal point, even if no digits follow it. The precision determines the number of digits after the decimal point and defaults to 6.
 .. [5] The alternate form causes the result to always contain a decimal point, and trailing zeroes are not removed as they would otherwise be. The precision determines the number of significant digits before and after the decimal point and defaults to 6.
 .. [6] The %r conversion was added in Python 2.0. The precision determines the maximal number of characters used.
-.. [7] If the object or format provided is a unicode string, the resulting string will also be unicode. The precision determines the maximal number of characters used. 
-
-Credits
-=======
-
-This project was created and is sponsored by:
-
-.. figure:: http://motion-m.ca/media/img/logo.png
-    :figwidth: image
-
-Motion Média (http://motion-m.ca)
+.. [7] If the object or format provided is a unicode string, the resulting string will also be unicode. The precision determines the maximal number of characters used.
